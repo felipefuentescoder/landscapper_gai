@@ -1,0 +1,16 @@
+# Database (SQLite works for local dev, PostgreSQL for Prod)
+DATABASE_URL="postgresql://user:password@localhost:5432/landscaper"
+
+# Authentication
+NEXTAUTH_URL="http://localhost:3000"
+NEXTAUTH_SECRET="super-secret-string-123"
+GOOGLE_CLIENT_ID="your-google-client-id"
+GOOGLE_CLIENT_SECRET="your-google-client-secret"
+
+# Notifications & Payments
+STRIPE_SECRET_KEY="sk_test_..."
+STRIPE_WEBHOOK_SECRET="whsec_..."
+RESEND_API_KEY="re_..."
+TWILIO_SID="AC_..."
+TWILIO_AUTH_TOKEN="..."
+TWILIO_PHONE_NUMBER="+1234567890"
