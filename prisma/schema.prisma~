@@ -1,0 +1,48 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum Tier {
+  FREE
+  GROWTH
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  tier          Tier      @default(FREE)
+  stripeId      String?   @unique
+  sites         Site[]
+}
+
+model Site {
+  id           String  @id @default(cuid())
+  userId       String
+  template     Int     @default(1)
+  businessName String
+  heroText     String
+  services     String[]
+  customDomain String? @unique
+  leadsCount   Int     @default(0)
+  user         User    @relation(fields: [userId], references: [id])
+  leads        Lead[]
+}
+
+model Lead {
+  id        String   @id @default(cuid())
+  siteId    String
+  name      String
+  phone     String?
+  email     String?
+  message   String
+  createdAt DateTime @default(now())
+  site      Site     @relation(fields: [siteId], references: [id])
+}
